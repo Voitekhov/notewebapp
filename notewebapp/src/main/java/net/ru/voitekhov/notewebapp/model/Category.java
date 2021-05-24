@@ -12,17 +12,13 @@ import javax.validation.constraints.NotNull;
 @Table(name = "categories")
 public class Category extends AbstractBaseEntity {
 
-    public static final String DELETE = "category.delete";
-    public static final String GET_ALL = "category.get_all";
-    public static final String GET = "category.get";
-
 
     @Column(name = "name", nullable = false)
     @NotNull
     @NotBlank
     String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
     User user;
@@ -35,4 +31,5 @@ public class Category extends AbstractBaseEntity {
     public Category() {
 
     }
+
 }
