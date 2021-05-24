@@ -20,7 +20,7 @@ public interface CrudJpaNote extends JpaRepository<Note, Integer> {
     @Query("SELECT n FROM Note n WHERE n.id=:id AND n.category.id=:categoryId")
     Note get(@Param("id") int id, @Param("categoryId") int categoryId);
 
-    @Query("SELECT n FROM Note n WHERE n.category.id =: categoryId")
+    @Query("SELECT n FROM Note n WHERE n.category.id =:categoryId")
     List<Note> getAll(@Param("categoryId") int categoryId);
 
     @Query("SELECT c FROM Category c WHERE c.id=:id")

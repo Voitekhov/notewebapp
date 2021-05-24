@@ -17,7 +17,7 @@ public class JpaCategoryRepository implements CategoryRepository {
 
     @Transactional
     @Override
-    public Category save(int userId, Category category) {
+    public Category save(Integer userId, Category category) {
         User user = repository.getUser(userId);
         category.setUser(user);
         if (category.isNew() | get(category.getId(), userId) != null) {
@@ -32,7 +32,7 @@ public class JpaCategoryRepository implements CategoryRepository {
     }
 
     @Override
-    public Category get(int id, int userId) {
+    public Category get(Integer id, int userId) {
         // IS IT WORK?
         Category category = repository.get(id, userId);
         return category != null && category.getUser().getId() == userId ? category : null;

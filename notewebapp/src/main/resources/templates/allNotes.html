@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <div th:each="note : ${notes}">
+        <tr>
+            <h3 th:text="${note.getTitle()}"></h3>
+            <p th:text="${note.getText()}"/>
+            <a th:href="${note.getLink()}" th:text="${note.getLink()}"></a>
+        <tr>
+    </div>
+</table>
+</body>
+</html>

@@ -15,10 +15,10 @@ public interface CrudJpaCategory extends JpaRepository<Category, Integer> {
     @Transactional
     @Modifying
     @Query("DELETE FROM Category c WHERE c.id=:id AND c.user.id=:userId")
-    int delete(@Param("id") int id, @Param("userId") int userId);
+    int delete(@Param("id") Integer id, @Param("userId") int userId);
 
     @Query("SELECT c FROM Category c WHERE c.id=:id AND c.user.id=:userId")
-    Category get(@Param("id") int id, @Param("userId") int userId);
+    Category get(@Param("id") Integer id, @Param("userId") int userId);
 
     @Query("SELECT c FROM Category c WHERE c.user.id =:userId order by c.name")
     List<Category> getAll(@Param("userId") int userId);
