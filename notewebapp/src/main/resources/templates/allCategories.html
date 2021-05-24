@@ -12,7 +12,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             type="text/javascript"></script>
-    <script crossorigin="anonymous" src="../static/js/main.js" th:src="@{/js/main.js}"
+    <script crossorigin="anonymous" src="../static/js/category.js" th:src="@{/js/category.js}"
             type="text/javascript"></script>
     <link crossorigin="anonymous"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -43,7 +43,7 @@
                 <tbody>
                 <div th:each="category : ${categories}">
                     <tr>
-                        <th><a th:href="@{/notes/{id}(id=${category.id})}"
+                        <th><a th:href="@{/note/{id}(id=${category.id})}"
                                th:text="${category.getName()}">user</a></th>
                         <td>
                             <a class="btn btn-danger delBtn"
