@@ -17,10 +17,10 @@ public class JpaCategoryRepository implements CategoryRepository {
 
     @Transactional
     @Override
-    public Category save(Integer userId, Category category) {
+    public Category save(int userId, Category category) {
         User user = repository.getUser(userId);
         category.setUser(user);
-        if (category.isNew() | get(category.getId(), userId) != null) {
+        if (category.isNew() || get(category.getId(), userId) != null) {
             return repository.save(category);
         }
         return null;
@@ -32,8 +32,7 @@ public class JpaCategoryRepository implements CategoryRepository {
     }
 
     @Override
-    public Category get(Integer id, int userId) {
-        // IS IT WORK?
+    public Category get(int id, int userId) {
         Category category = repository.get(id, userId);
         return category != null && category.getUser().getId() == userId ? category : null;
     }

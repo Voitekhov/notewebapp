@@ -29,7 +29,7 @@ public class JpaNoteRepository implements NoteRepository {
     }
 
     @Override
-    public Note get(Integer id, int categoryId) {
+    public Note get(int id, int categoryId) {
         Note note = repository.get(id, categoryId);
         return note != null && note.getCategory().getId() == categoryId ? note : null;
     }

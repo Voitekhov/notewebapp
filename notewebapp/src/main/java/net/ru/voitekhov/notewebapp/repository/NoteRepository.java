@@ -9,7 +9,7 @@ public interface NoteRepository {
     public Note save(Note note, int categoryId);
 
 
-    public Note get(Integer id, int categoryId);
+    public Note get(int id, int categoryId);
 
     public boolean delete(int id, int categoryId);
 
