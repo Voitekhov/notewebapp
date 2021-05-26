@@ -35,9 +35,9 @@ public class User extends AbstractBaseEntity {
     @NotNull
     private boolean enabled;
 
-    @Column(name = "role",columnDefinition = "USER")
+    @Column(name = "role", columnDefinition = "varchar(5) default 'USER'", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.USER;
 
     public User(Integer id, String first_name, String email, String password) {
         super(id);

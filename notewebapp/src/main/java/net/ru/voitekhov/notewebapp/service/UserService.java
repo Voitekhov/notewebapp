@@ -9,8 +9,12 @@ import java.util.List;
 
 @Service
 public class UserService {
+    final UserRepository repository;
+
     @Autowired
-    UserRepository repository;
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public User save(User user) {
         return repository.save(user);
@@ -34,5 +38,15 @@ public class UserService {
 
     public User findByEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    public boolean confirmPassword(String password1, String password2) {
+        return password1.equals(password2);
+    }
+
+    public boolean isFreeEmail(String email) {
+        return repository.findByEmail(email) == null;
+
+
     }
 }

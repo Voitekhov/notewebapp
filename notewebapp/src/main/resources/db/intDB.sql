@@ -8,7 +8,7 @@ CREATE SEQUENCE global_seq START WITH 100000;
 CREATE TABLE users
 (
     id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    first_name       VARCHAR(45)                        NOT NULL,
+    first_name       VARCHAR(45)                  NOT NULL,
     email      VARCHAR(100)                       NOT NULL,
     password   VARCHAR(100)                       NOT NULL,
     role       VARCHAR(5)          DEFAULT 'USER' NOT NULL,

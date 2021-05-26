@@ -12,8 +12,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class JpaUserRepository implements UserRepository {
 
+    final CrudJpaUser repository;
+
     @Autowired
-    CrudJpaUser repository;
+    public JpaUserRepository(CrudJpaUser repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     @Override
