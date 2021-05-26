@@ -1,4 +1,4 @@
-/*
+
 package net.ru.voitekhov.notewebapp.security;
 
 import net.ru.voitekhov.notewebapp.model.User;
@@ -15,13 +15,13 @@ public class CustomUserDetails implements UserDetails {
     private final User user;
 
     public CustomUserDetails(User user) {
-        super();
+        //super();
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().name()));
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
     @Override
@@ -53,4 +53,5 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-}*/
+}
+

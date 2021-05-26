@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/category")
+@RequestMapping("/category/{userId}")
 public class CategoryController {
 
     final CategoryService service;
@@ -19,26 +19,27 @@ public class CategoryController {
     }
 
     @GetMapping
-    public String getAllCategories(Model model) {
-        model.addAttribute("categories", service.getAll(100001));
+    public String getAllCategories(Model model, @PathVariable("userId") int userId) {
+        model.addAttribute("categories", service.getAll(userId));
+        model.addAttribute("userId", userId);
         return "allCategories";
     }
 
     @GetMapping("/get/{id}")
     @ResponseBody
-    public Category get(@PathVariable("id") int id) {
-        return service.get(id, 100001);
+    public Category get(@PathVariable("userId") int userId, @PathVariable("id") int id) {
+        return service.get(id, userId);
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
-        service.delete(id, 100001);
-        return "redirect:/category";
+    public String delete(@PathVariable("userId") int userId, @PathVariable("id") int id) {
+        service.delete(id, userId);
+        return "redirect:/category/" + userId;
     }
 
     @PostMapping("/save")
-    public String save(Category category) {
-        service.save(100001, category);
-        return "redirect:/category";
+    public String save(@PathVariable("userId") int userId, Category category) {
+        service.save(userId, category);
+        return "redirect:/category/" + userId;
     }
 }

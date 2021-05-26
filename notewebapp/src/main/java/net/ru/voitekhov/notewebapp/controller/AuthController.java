@@ -1,3 +1,4 @@
+/*
 package net.ru.voitekhov.notewebapp.controller;
 
 import org.springframework.stereotype.Controller;
@@ -24,3 +25,4 @@ public class AuthController {
     }
 
 }
+*/
