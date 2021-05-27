@@ -51,7 +51,7 @@ public class AuthController {
             return getLoginPage();
         }
 
-        return null;
+        return getRegistrationForm();
     }
 }
 

@@ -1,11 +1,14 @@
 package net.ru.voitekhov.notewebapp.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "notes")
 public class Note extends AbstractBaseEntity {
 
@@ -39,42 +42,6 @@ public class Note extends AbstractBaseEntity {
     }
 
     public Note() {
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
 }

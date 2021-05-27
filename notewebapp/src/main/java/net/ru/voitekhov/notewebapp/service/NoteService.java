@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class NoteService {
 
+    final NoteRepository repository;
+
     @Autowired
-    NoteRepository repository;
+    public NoteService(NoteRepository repository) {
+        this.repository = repository;
+    }
 
     public Note save(Note note, int categoryId) {
         return repository.save(note, categoryId);

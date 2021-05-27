@@ -1,6 +1,7 @@
 package net.ru.voitekhov.notewebapp.model;
 
 public enum Permission {
+    // TO DO Permissions
     COMMON_ACCESS("common:access"),
     EXTENDED_ACCESS("extended:access");
 

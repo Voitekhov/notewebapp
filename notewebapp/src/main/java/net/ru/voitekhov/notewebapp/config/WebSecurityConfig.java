@@ -26,7 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -37,21 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/auth/login")
                 .permitAll()
                 .defaultSuccessUrl("/auth/success", true);
-
-/* .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/auth/login");*/
-
-/*  http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/registration/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated().and().formLogin();*/
 
     }
 

@@ -1,11 +1,14 @@
 package net.ru.voitekhov.notewebapp.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
+@Data
 @Table(name = "categories")
 public class Category extends AbstractBaseEntity {
 
@@ -29,19 +32,4 @@ public class Category extends AbstractBaseEntity {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

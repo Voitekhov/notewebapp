@@ -15,7 +15,6 @@ public class CustomUserDetails implements UserDetails {
     private final User user;
 
     public CustomUserDetails(User user) {
-        //super();
         this.user = user;
     }
 

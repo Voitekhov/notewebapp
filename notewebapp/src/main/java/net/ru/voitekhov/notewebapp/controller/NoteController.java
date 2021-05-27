@@ -4,6 +4,8 @@ package net.ru.voitekhov.notewebapp.controller;
 import net.ru.voitekhov.notewebapp.model.Note;
 import net.ru.voitekhov.notewebapp.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,6 @@ public class NoteController {
 
     @GetMapping("/{categoryId}")
     public String getAllNotes(@PathVariable("categoryId") int categoryId, Model model) {
-        // handle empty category
         model.addAttribute("notes", service.getAll(categoryId));
         model.addAttribute("categoryId", categoryId);
         return "allNotes";
@@ -43,6 +44,11 @@ public class NoteController {
     public String delete(@PathVariable("categoryId") int categoryId, @PathVariable("id") int id) {
         service.delete(id, categoryId);
         return "redirect:/note/" + categoryId;
+    }
+
+    @GetMapping("back")
+    public String back() {
+        return "redirect:/auth/success";
     }
 
 

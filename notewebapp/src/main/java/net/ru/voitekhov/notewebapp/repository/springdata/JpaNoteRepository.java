@@ -12,9 +12,14 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public class JpaNoteRepository implements NoteRepository {
-    @Autowired
-    CrudJpaNote repository;
+    final CrudJpaNote repository;
 
+    @Autowired
+    public JpaNoteRepository(CrudJpaNote repository) {
+        this.repository = repository;
+    }
+
+    @Transactional
     @Override
     public Note save(Note note, int categoryId) {
         Category category = repository.getCategory(categoryId);
@@ -34,6 +39,7 @@ public class JpaNoteRepository implements NoteRepository {
         return note != null && note.getCategory().getId() == categoryId ? note : null;
     }
 
+    @Transactional
     @Override
     public boolean delete(int id, int categoryId) {
         return repository.delete(id, categoryId) != 0;

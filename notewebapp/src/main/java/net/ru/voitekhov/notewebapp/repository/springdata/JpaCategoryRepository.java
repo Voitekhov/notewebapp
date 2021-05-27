@@ -12,8 +12,12 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public class JpaCategoryRepository implements CategoryRepository {
+    final CrudJpaCategory repository;
+
     @Autowired
-    CrudJpaCategory repository;
+    public JpaCategoryRepository(CrudJpaCategory repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     @Override
@@ -26,6 +30,7 @@ public class JpaCategoryRepository implements CategoryRepository {
         return null;
     }
 
+    @Transactional
     @Override
     public boolean delete(int id, int userId) {
         return repository.delete(id, userId) != 0;
