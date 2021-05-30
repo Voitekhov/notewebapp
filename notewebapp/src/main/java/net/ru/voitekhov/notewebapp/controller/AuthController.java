@@ -30,8 +30,7 @@ public class AuthController {
 
     @GetMapping("/success")
     public String getCategoryPage() {
-        int id = SecurityUtil.getAuthUser();
-        return "redirect:/category/" + id;
+        return "redirect:/category";
     }
 
     @GetMapping("/registration")

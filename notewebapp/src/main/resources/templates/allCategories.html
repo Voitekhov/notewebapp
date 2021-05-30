@@ -46,9 +46,9 @@
                                th:text="${category.getName()}">user</a></th>
                         <td>
                             <a class="btn btn-danger delBtn"
-                               th:href="@{/category/{userId}/delete/{id}(userId = ${userId},id=${category.id})}">Delete</a>
+                               th:href="@{/category/delete/{id}(id=${category.id})}">Delete</a>
                             <a class="btn btn-primary eBtn"
-                               th:href="@{/category/{userId}/get/{id}(userId = ${userId},id=${category.id})}">Edit</a>
+                               th:href="@{/category/get/{id}(id=${category.id})}">Edit</a>
                         </td>
                     </tr>
                 </div>
@@ -59,7 +59,7 @@
 </div>
 
 <div class="myForm">
-    <form action="#" method="post" th:action="@{/category/{userId}/save(userId = ${userId})}">
+    <form action="#" method="post" th:action="@{/category/save}">
         <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
              id="exampleModal" role="dialog"
              tabindex="-1">
