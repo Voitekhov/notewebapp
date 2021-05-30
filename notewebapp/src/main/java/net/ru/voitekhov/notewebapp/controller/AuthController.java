@@ -2,6 +2,7 @@ package net.ru.voitekhov.notewebapp.controller;
 
 import net.ru.voitekhov.notewebapp.model.User;
 import net.ru.voitekhov.notewebapp.service.UserService;
+import net.ru.voitekhov.notewebapp.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,10 +30,7 @@ public class AuthController {
 
     @GetMapping("/success")
     public String getCategoryPage() {
-        UserDetails principal =
-                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        principal.getUsername();
-        int id = service.findByEmail(principal.getUsername()).getId();
+        int id = SecurityUtil.getAuthUser();
         return "redirect:/category/" + id;
     }
 
