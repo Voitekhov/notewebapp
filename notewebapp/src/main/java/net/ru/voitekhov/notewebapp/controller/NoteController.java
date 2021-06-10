@@ -2,8 +2,8 @@ package net.ru.voitekhov.notewebapp.controller;
 
 
 import net.ru.voitekhov.notewebapp.model.Note;
-import net.ru.voitekhov.notewebapp.service.CategoryService;
-import net.ru.voitekhov.notewebapp.service.NoteService;
+import net.ru.voitekhov.notewebapp.service.impl.CategoryServiceImpl;
+import net.ru.voitekhov.notewebapp.service.impl.NoteServiceImpl;
 import net.ru.voitekhov.notewebapp.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/note")
 public class NoteController {
 
-    private final NoteService noteService;
-    private final CategoryService categoryService;
+    private final NoteServiceImpl noteService;
+    private final CategoryServiceImpl categoryServiceImpl;
 
     @Autowired
-    public NoteController(NoteService noteService, CategoryService categoryService) {
+    public NoteController(NoteServiceImpl noteService, CategoryServiceImpl categoryServiceImpl) {
         this.noteService = noteService;
-        this.categoryService = categoryService;
+        this.categoryServiceImpl = categoryServiceImpl;
     }
 
 
     @GetMapping("/{categoryId}")
     public String getAllNotes(@PathVariable("categoryId") int categoryId, Model model) {
         int userId = SecurityUtil.getAuthUser();
-        if (categoryService.get(categoryId, userId) == null) {
+        if (categoryServiceImpl.get(categoryId, userId) == null) {
             return "NotAccess";
         }
         model.addAttribute("notes", noteService.getAll(categoryId));

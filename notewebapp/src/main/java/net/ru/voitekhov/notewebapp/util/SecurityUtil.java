@@ -1,6 +1,6 @@
 package net.ru.voitekhov.notewebapp.util;
 
-import net.ru.voitekhov.notewebapp.service.UserService;
+import net.ru.voitekhov.notewebapp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 public class SecurityUtil {
 
 
-    private static UserService service;
+    private static UserServiceImpl service;
 
     @Autowired
-    private SecurityUtil(UserService service) {
+    private SecurityUtil(UserServiceImpl service) {
         SecurityUtil.service = service;
     }
 

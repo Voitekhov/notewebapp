@@ -1,38 +1,17 @@
 package net.ru.voitekhov.notewebapp.service;
 
 import net.ru.voitekhov.notewebapp.model.Category;
-import net.ru.voitekhov.notewebapp.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
-public class CategoryService {
+public interface CategoryService {
 
-    final CategoryRepository repository;
+    public Category save(int userId, Category category);
 
-    @Autowired
-    public CategoryService(CategoryRepository repository) {
-        this.repository = repository;
-    }
+    public boolean delete(int id, int userId);
 
-    public Category save(int userId, Category category) {
-        return repository.save(userId, category);
-    }
+    public Category get(int id, int userId);
 
-
-    public boolean delete(int id, int userId) {
-        return repository.delete(id, userId);
-    }
-
-
-    public Category get(int id, int userId) {
-        return repository.get(id, userId);
-    }
-
-
-    public List<Category> getAll(int userId) {
-        return repository.getAll(userId);
-    }
+    public List<Category> getAll(int userId);
 }

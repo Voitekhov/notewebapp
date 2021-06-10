@@ -21,8 +21,6 @@ public class Note extends AbstractBaseEntity {
     String link;
 
     @Column(name = "text", nullable = false)
-    @NotNull
-    @NotBlank
     String text;
 
     @ManyToOne(fetch = FetchType.EAGER)

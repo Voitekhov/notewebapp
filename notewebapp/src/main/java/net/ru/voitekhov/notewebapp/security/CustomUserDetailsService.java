@@ -2,7 +2,7 @@
 package net.ru.voitekhov.notewebapp.security;
 
 import net.ru.voitekhov.notewebapp.model.User;
-import net.ru.voitekhov.notewebapp.repository.UserRepository;
+import net.ru.voitekhov.notewebapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,17 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByEmail(username);
+        User user = userService.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

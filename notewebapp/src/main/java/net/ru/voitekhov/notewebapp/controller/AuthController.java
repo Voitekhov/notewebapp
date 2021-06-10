@@ -2,6 +2,7 @@ package net.ru.voitekhov.notewebapp.controller;
 
 import net.ru.voitekhov.notewebapp.model.User;
 import net.ru.voitekhov.notewebapp.service.UserService;
+import net.ru.voitekhov.notewebapp.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
