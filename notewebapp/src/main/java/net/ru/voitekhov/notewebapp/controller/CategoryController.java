@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/category")
 public class CategoryController {
 
-    final CategoryService service;
+    private CategoryService service;
+    private SecurityUtil securityUtil;
 
     @Autowired
-    public CategoryController(CategoryService service) {
+    public CategoryController(CategoryService service, SecurityUtil securityUtil) {
         this.service = service;
+        this.securityUtil = securityUtil;
     }
 
     @GetMapping
     public String getAllCategories(Model model) {
-        int userId = SecurityUtil.getAuthUser();
+        int userId = securityUtil.getAuthUser();
         model.addAttribute("categories", service.getAll(userId));
         model.addAttribute("userId", userId);
         return "allCategories";
@@ -30,20 +32,20 @@ public class CategoryController {
     @GetMapping("/get/{id}")
     @ResponseBody
     public Category get(@PathVariable("id") int id) {
-        int userId = SecurityUtil.getAuthUser();
+        int userId = securityUtil.getAuthUser();
         return service.get(id, userId);
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
-        int userId = SecurityUtil.getAuthUser();
+        int userId = securityUtil.getAuthUser();
         service.delete(id, userId);
         return "redirect:/category";
     }
 
     @PostMapping("/save")
     public String save(Category category) {
-        int userId = SecurityUtil.getAuthUser();
+        int userId = securityUtil.getAuthUser();
         service.save(userId, category);
         return "redirect:/category";
     }

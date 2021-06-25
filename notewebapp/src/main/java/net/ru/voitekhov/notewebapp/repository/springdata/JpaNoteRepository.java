@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CrudJpaNote extends JpaRepository<Note, Integer> {
+public interface JpaNoteRepository extends JpaRepository<Note, Integer> {
     @Transactional
     @Modifying
     @Query("DELETE FROM Note n WHERE n.id=:id AND n.category.id=:categoryId")

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CrudJpaCategory extends JpaRepository<Category, Integer> {
+public interface JpaCategoryRepository extends JpaRepository<Category, Integer> {
 
     @Transactional
     @Modifying

@@ -1,8 +1,9 @@
 package net.ru.voitekhov.notewebapp.controller;
 
+import net.ru.voitekhov.notewebapp.exception.NotUniquEntityException;
 import net.ru.voitekhov.notewebapp.model.User;
 import net.ru.voitekhov.notewebapp.service.UserService;
-import net.ru.voitekhov.notewebapp.service.impl.UserServiceImpl;
+import net.ru.voitekhov.notewebapp.util.login.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,12 @@ public class AuthController {
 
     final UserService service;
 
+    final LoginUtil loginUtil;
+
     @Autowired
-    public AuthController(UserService service) {
+    public AuthController(UserService service, LoginUtil loginUtil) {
         this.service = service;
+        this.loginUtil = loginUtil;
     }
 
     @GetMapping("/login")
@@ -41,12 +45,14 @@ public class AuthController {
                                @RequestParam("email") String email,
                                @RequestParam("password") String password,
                                @RequestParam("password_confirm") String password_confirm) {
-        if (service.confirmPassword(password, password_confirm) && service.isFreeEmail(email)) {
-            service.save(new User(null, username, email, password));
-            return getLoginPage();
+        if (!loginUtil.confirmPassword(password, password_confirm)) {
+            throw new NotUniquEntityException("Passwords are not equals");
         }
-
-        return getRegistrationForm();
+        if (!loginUtil.isFreeEmail(email)) {
+            throw new NotUniquEntityException(String.format("Email %s is busy", email));
+        }
+        service.save(new User(null, username, email, password));
+        return getLoginPage();
     }
 
 }

@@ -15,8 +15,4 @@ public interface UserService {
     public List<User> getAll();
 
     public User findByEmail(String email);
-
-    public boolean confirmPassword(String password1, String password2);
-
-    public boolean isFreeEmail(String email);
 }

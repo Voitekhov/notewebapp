@@ -3,20 +3,21 @@ package net.ru.voitekhov.notewebapp.service.impl;
 import net.ru.voitekhov.notewebapp.model.Category;
 import net.ru.voitekhov.notewebapp.model.Note;
 import net.ru.voitekhov.notewebapp.service.NoteService;
-import net.ru.voitekhov.notewebapp.repository.springdata.CrudJpaNote;
+import net.ru.voitekhov.notewebapp.repository.springdata.JpaNoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
+@Service
 @Transactional(readOnly = true)
 public class NoteServiceImpl implements NoteService {
-    final CrudJpaNote repository;
+    final JpaNoteRepository repository;
 
     @Autowired
-    public NoteServiceImpl(CrudJpaNote repository) {
+    public NoteServiceImpl(JpaNoteRepository repository) {
         this.repository = repository;
     }
 

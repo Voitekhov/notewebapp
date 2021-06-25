@@ -10,15 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecurityUtil {
 
-
-    private static UserServiceImpl service;
+    private final UserServiceImpl service;
 
     @Autowired
     private SecurityUtil(UserServiceImpl service) {
-        SecurityUtil.service = service;
+        this.service = service;
     }
 
-    public static Integer getAuthUser() {
+    public  Integer getAuthUser() {
         UserDetails principal =
                 (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         principal.getUsername();

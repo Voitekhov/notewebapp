@@ -2,21 +2,22 @@ package net.ru.voitekhov.notewebapp.service.impl;
 
 import net.ru.voitekhov.notewebapp.model.User;
 import net.ru.voitekhov.notewebapp.service.UserService;
-import net.ru.voitekhov.notewebapp.repository.springdata.CrudJpaUser;
+import net.ru.voitekhov.notewebapp.repository.springdata.JpaUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
+@Service
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    final CrudJpaUser repository;
+    final JpaUserRepository repository;
 
     @Autowired
-    public UserServiceImpl(CrudJpaUser repository) {
+    public UserServiceImpl(JpaUserRepository repository) {
         this.repository = repository;
     }
 
@@ -44,17 +45,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return repository.findByEmail(email);
-    }
-
-    @Override
-    public boolean confirmPassword(String password1, String password2) {
-        return password1.equals(password2);
-    }
-
-    @Override
-    public boolean isFreeEmail(String email) {
-        return repository.findByEmail(email) == null;
-
-
     }
 }
