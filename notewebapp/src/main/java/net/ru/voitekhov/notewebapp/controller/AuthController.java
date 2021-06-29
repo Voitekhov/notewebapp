@@ -17,12 +17,9 @@ public class AuthController {
 
     final UserService service;
 
-    final LoginUtil loginUtil;
-
     @Autowired
-    public AuthController(UserService service, LoginUtil loginUtil) {
+    public AuthController(UserService service) {
         this.service = service;
-        this.loginUtil = loginUtil;
     }
 
     @GetMapping("/login")
@@ -45,10 +42,10 @@ public class AuthController {
                                @RequestParam("email") String email,
                                @RequestParam("password") String password,
                                @RequestParam("password_confirm") String password_confirm) {
-        if (!loginUtil.confirmPassword(password, password_confirm)) {
+        if (!LoginUtil.confirmPassword(password, password_confirm)) {
             throw new NotUniquEntityException("Passwords are not equals");
         }
-        if (!loginUtil.isFreeEmail(email)) {
+        if (!LoginUtil.isFreeEmail(email)) {
             throw new NotUniquEntityException(String.format("Email %s is busy", email));
         }
         service.save(new User(null, username, email, password));
