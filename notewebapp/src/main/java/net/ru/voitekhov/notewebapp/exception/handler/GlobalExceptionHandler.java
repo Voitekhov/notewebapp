@@ -1,6 +1,7 @@
 package net.ru.voitekhov.notewebapp.exception.handler;
 
 
+import net.ru.voitekhov.notewebapp.exception.AccessException;
 import net.ru.voitekhov.notewebapp.exception.BadRequestException;
 import net.ru.voitekhov.notewebapp.exception.NotFoundException;
 import net.ru.voitekhov.notewebapp.exception.NotUniquEntityException;
@@ -27,6 +28,9 @@ public class GlobalExceptionHandler {
         }
         if (exception instanceof NotUniquEntityException) {
             httpStatus = HttpStatus.ALREADY_REPORTED;
+        }
+        if(exception instanceof AccessException){
+            httpStatus = HttpStatus.FORBIDDEN;
         }
         ResponseBody responseBody = new ResponseBody(exception.getMessage(), exception, httpStatus,
                 ZonedDateTime.now());
