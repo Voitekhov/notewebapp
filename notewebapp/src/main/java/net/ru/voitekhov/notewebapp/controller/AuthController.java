@@ -1,30 +1,54 @@
 package net.ru.voitekhov.notewebapp.controller;
 
+import net.ru.voitekhov.notewebapp.config.security.jwt.JwtTokenProvider;
 import net.ru.voitekhov.notewebapp.exception.NotUniquEntityException;
+import net.ru.voitekhov.notewebapp.model.LoginUser;
 import net.ru.voitekhov.notewebapp.model.User;
 import net.ru.voitekhov.notewebapp.service.UserService;
 import net.ru.voitekhov.notewebapp.util.login.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
+//TODO transform to rest controller
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
 
-    final UserService service;
+    private final UserService service;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
+
 
     @Autowired
-    public AuthController(UserService service) {
+    public AuthController(UserService service, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
         this.service = service;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @GetMapping("/login")
-    public String getLoginPage() {
-        return "login";
+    @PostMapping("/login")
+    public ResponseEntity getLoginPage(@RequestBody LoginUser request) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+            User user = service.findByEmail(request.getEmail());
+            String token = jwtTokenProvider.createToken(request.getEmail(), user.getRole());
+            Map<Object, Object> response = new HashMap<>();
+            response.put("email", request.getEmail());
+            response.put("token", token);
+            return ResponseEntity.ok(response);
+        } catch (AuthenticationException e) {
+            return new ResponseEntity<>("Invalid email/password combination", HttpStatus.FORBIDDEN);
+        }
     }
 
     @GetMapping("/success")
@@ -49,7 +73,7 @@ public class AuthController {
             throw new NotUniquEntityException(String.format("Email %s is busy", email));
         }
         service.save(new User(null, username, email, password));
-        return getLoginPage();
+        return "s";
     }
 
 }
